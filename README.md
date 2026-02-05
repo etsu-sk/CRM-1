@@ -20,9 +20,17 @@
 - ダッシュボード（期日超過アラート）
 - ユーザー管理（管理者のみ）
 
-## セットアップ
+## クイックスタート
 
-### 1. バックエンドのセットアップ
+### Renderでデプロイ（推奨）
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com)
+
+詳細は [DEPLOYMENT.md](DEPLOYMENT.md) を参照してください。
+
+### ローカル開発環境のセットアップ
+
+#### 1. バックエンドのセットアップ
 
 ```bash
 cd backend
@@ -32,7 +40,7 @@ node server.js
 
 バックエンドは `http://localhost:3000` で起動します。
 
-### 2. フロントエンドのセットアップ
+#### 2. フロントエンドのセットアップ
 
 ```bash
 cd frontend

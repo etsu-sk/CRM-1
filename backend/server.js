@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const User = require('./src/models/User');
@@ -32,15 +33,25 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'CRM API is running' });
 });
 
+// 本番環境: フロントエンドの静的ファイルを配信
+if (process.env.NODE_ENV === 'production') {
+  const frontendPath = path.join(__dirname, '../frontend/dist');
+  app.use(express.static(frontendPath));
+
+  // SPA用: API以外のルートはindex.htmlを返す
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(frontendPath, 'index.html'));
+    } else {
+      res.status(404).json({ error: 'エンドポイントが見つかりません' });
+    }
+  });
+}
+
 // エラーハンドリング
 app.use((err, req, res, next) => {
   console.error('エラー:', err);
   res.status(500).json({ error: 'サーバーエラーが発生しました' });
-});
-
-// 404ハンドリング
-app.use((req, res) => {
-  res.status(404).json({ error: 'エンドポイントが見つかりません' });
 });
 
 // サーバー起動
