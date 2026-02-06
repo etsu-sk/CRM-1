@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// 開発環境では localhost:3000、本番環境では相対パス
-const API_BASE_URL = import.meta.env.PROD
-  ? '/api'
-  : 'http://localhost:3000/api';
+// 開発・本番環境ともに相対パス（vite.config.jsのproxyが処理）
+const API_BASE_URL = '/api';
 
 // Axiosインスタンス作成
 const api = axios.create({
