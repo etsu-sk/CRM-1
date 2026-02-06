@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "CRM System with React + Node.js + SQLite",
   "scripts": {
-    "postinstall": "npm install --prefix backend && npm install --prefix frontend --legacy-peer-deps",
-    "build": "npm install --prefix backend && npm install --prefix frontend --legacy-peer-deps && npm run build --prefix frontend",
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install --legacy-peer-deps",
+    "build-frontend": "cd frontend && npm run build",
+    "build": "npm run install-backend && npm run install-frontend && npm run build-frontend",
     "start": "NODE_ENV=production node backend/server.js",
     "dev:backend": "cd backend && node server.js",
     "dev:frontend": "cd frontend && npm run dev"
